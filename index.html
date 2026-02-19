@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tennis Express Video</title>
+  <!-- simple & clean, no external dependencies -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f7fa;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.5;
+      color: #1e2b37;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* main container */
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* header area — Tennis Express Video */
+    .brand {
+      margin-bottom: 2.5rem;
+      border-bottom: 3px solid #2c5f2d; /* deep green – tennis court vibe */
+      padding-bottom: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .brand h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(145deg, #1d4e1f, #104010);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .brand .tagline {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #3a5743;
+      background: #e9f0e9;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+    }
+
+    /* featured main video */
+    .featured-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .featured-label {
+      display: inline-block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: #2c5f2d;
+      color: white;
+      padding: 0.25rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+    }
+
+    .video-card-featured {
+      display: flex;
+      flex-wrap: wrap;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 20px 35px -8px rgba(0, 30, 0, 0.15);
+      overflow: hidden;
+      border: 1px solid rgba(44, 95, 45, 0.2);
+    }
+
+    .video-thumb-featured {
+      flex: 1 1 55%;
+      background: #1a2e1a;
+      position: relative;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-thumb-featured img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.9;
+      transition: 0.2s;
+    }
+
+    .play-button-embed {
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1d4e1f;
+      font-size: 2rem;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      pointer-events: none;
+      border: 2px solid white;
+    }
+
+    .play-button-embed::after {
+      content: "▶";
+      margin-left: 4px;
+    }
+
+    .video-info-featured {
+      flex: 1 1 45%;
+      padding: 2rem 2rem 2rem 2rem;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .video-meta {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.9rem;
+      color: #2c5f2d;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .video-info-featured h2 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      color: #0f2b14;
+    }
+
+    .video-info-featured p {
+      color: #2e3b34;
+      margin-bottom: 1.6rem;
+      font-size: 1.05rem;
+      max-width: 90%;
+    }
+
+    .button-outline {
+      background: transparent;
+      border: 2px solid #2c5f2d;
+      color: #2c5f2d;
+      font-weight: 600;
+      padding: 0.7rem 2rem;
+      border-radius: 40px;
+      font-size: 1rem;
+      cursor: default;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      width: fit-content;
+      transition: 0.1s;
+      text-decoration: none;
+    }
+
+    .button-outline:hover {
+      background: #eff6ef;
+    }
+
+    /* video grid – express collection */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 2.8rem 0 1.5rem 0;
+    }
+
+    .section-header h3 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #14381a;
+    }
+
+    .section-header span {
+      background: #dee9de;
+      padding: 0.3rem 1.1rem;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #1b4d1b;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .grid-item {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 25px -10px rgba(26, 46, 26, 0.15);
+      transition: transform 0.15s, box-shadow 0.2s;
+      border: 1px solid rgba(44, 95, 45, 0.15);
+    }
+
+    .grid-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 30px -8px #1d3a1d80;
+    }
+
+    .thumb-placeholder {
+      background: #162916;
+      height: 160px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 2.5rem;
+    }
+
+    .thumb-placeholder span {
+      position: absolute;
+      background: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border: 2px solid rgba(255,255,240,0.8);
+      font-size: 1.4rem;
+      backdrop-filter: blur(2px);
+    }
+
+    .thumb-placeholder small {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 0.2rem 0.6rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .grid-content {
+      padding: 1.2rem 1.2rem 1.5rem 1.2rem;
+    }
+
+    .grid-content h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #17331a;
+    }
+
+    .grid-content .meta {
+      font-size: 0.85rem;
+      color: #4b6b4b;
+      margin-bottom: 0.75rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .grid-content p {
+      color: #2f4235;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* mini newsletter / static CTA */
+    .insider-box {
+      background: linear-gradient(105deg, #e7f3e7 0%, #d5e8d5 100%);
+      border-radius: 48px;
+      padding: 2.5rem 2.8rem;
+      margin: 2rem 0 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #acc9ac;
+    }
+
+    .insider-text h4 {
+      font-size: 1.8rem;
+      font-weight: 650;
+      color: #1b471b;
+      margin-bottom: 0.4rem;
+    }
+
+    .insider-text p {
+      font-size: 1.1rem;
+      color: #29522b;
+    }
+
+    .email-chip {
+      background: white;
+      padding: 0.6rem 1.2rem 0.6rem 1.8rem;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,40,0,0.08);
+    }
+
+    .email-chip span {
+      color: #2f5e30;
+      font-weight: 500;
+    }
+
+    .email-chip .badge {
+      background: #2c5f2d;
+      color: white;
+      border-radius: 30px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* footer */
+    .footer-note {
+      border-top: 1px solid #bfd8bf;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      color: #336633;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #2a5e2a;
+      font-weight: 500;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+      background: none;
+    }
+
+    /* dummy video icon / css-only representation */
+    .static-indicator {
+      pointer-events: none;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px dashed #bdd1bd;
+    }
+
+    /* responsive touches */
+    @media (max-width: 680px) {
+      .brand {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .video-info-featured h2 {
+        font-size: 1.7rem;
+      }
+      .video-info-featured p {
+        max-width: 100%;
+      }
+      .insider-box {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+        gap: 1.8rem;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- header with identity "Tennis Express Video" -->
+    <div class="brand">
+      <h1>🎾 Tennis Express Video</h1>
+      <div class="tagline">static hub · fresh from the court</div>
+    </div>
+
+    <!-- featured video section (static) -->
+    <div class="featured-section">
+      <div class="featured-label">⭐ court side · featured</div>
+      <div class="video-card-featured">
+        <div class="video-thumb-featured">
+          <!-- pure css/dummy representation of a video thumbnail -->
+          <img 
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%231d391d'/%3E%3Ccircle cx='300' cy='180' r='70' fill='%23f3d06b' opacity='0.2'/%3E%3Cpath d='M150 250 L450 250' stroke='%23d8e8b2' stroke-width='4' stroke-dasharray='8 8'/%3E%3Ccircle cx='300' cy='250' r='45' fill='none' stroke='%23f5f2d2' stroke-width='3'/%3E%3Ctext x='240' y='280' fill='%23c0d8c0' font-size='32' font-weight='bold' font-family='monospace'%3E🎾%3C/text%3E%3C/svg%3E"
+            alt="tennis abstract highlight"
+          />
+          <div class="play-button-embed" aria-label="play indicator"></div>
+        </div>
+        <div class="video-info-featured">
+          <div class="video-meta">
+            <span>⏱️ 12:34 · highlights</span>
+            <span>📅 2025 · Wimbledon warm-up</span>
+          </div>
+          <h2>Rally of the year:<br> baseline masterclass</h2>
+          <p>Raw court sound & extended exchange — Sinner vs. Alcaraz practice set. filmed in 4K slow motion.</p>
+          <!-- static "watch now" button (non-functional, just style) -->
+          <div class="button-outline">▶ watch full video</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- video grid section: express collection -->
+    <div class="section-header">
+      <h3>🎥 latest express videos</h3>
+      <span>+ 18 new this week</span>
+    </div>
+
+    <div class="video-grid">
+      <!-- grid item 1 -->
+      <div class="grid-item">
+        <div class="thumb-placeholder">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='170' viewBox='0 0 300 170'%3E%3Crect width='300' height='170' fill='%23213f21'/%3E%3Ctext x='30' y='100' fill='%23b8d0b8' font-size='45'%3E⚡%3C/text%3E%3C/svg%3E" alt="serve" style="width:100%; height:100%; object-fit: cover;" />
+          <span>▶</span>
+          <small>4:18</small>
+        </div>
+        <div class="grid-content">
+          <h4>Lightning serve</h4>
+          <div class="meta">🎾 serve · 1.2k views</div>
+          <p>Sabalenka & Rybakina – slow-mo analysis</p>
+        </div>
+      </div>
+
+      <!-- grid item 2 -->
+      <div class="grid-item">
+        <div class="thumb-placeholder">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='170' viewBox='0 0 300 170'%3E%3Crect width='300' height='170' fill='%23234d23'/%3E%3Ccircle cx='150' cy='85' r='33' fill='none' stroke='%23e5d88e' stroke-width='4'/%3E%3C/svg%3E" alt="drills" style="width:100%; height:100%; object-fit: cover;" />
+          <span>▶</span>
+          <small>7:02</small>
+        </div>
+        <div class="grid-content">
+          <h4>Topspin secret</h4>
+          <div class="meta">🎾 technique · 4.3k views</div>
+          <p>Federer’s hidden drill (archive footage)</p>
+        </div>
+      </div>
+
+      <!-- grid item 3 -->
+      <div class="grid-item">
+        <div class="thumb-placeholder">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='170' viewBox='0 0 300 170'%3E%3Crect width='300' height='170' fill='%2326531f'/%3E%3Cpath d='M50 120 L250 120' stroke='%23dfc27d' stroke-width='6' stroke-dasharray='8 8' /%3E%3C/svg%3E" alt="doubles" style="width:100%; height:100%; object-fit: cover;" />
+          <span>▶</span>
+          <small>9:41</small>
+        </div>
+        <div class="grid-content">
+          <h4>Doubles IQ</h4>
+          <div class="meta">🎾 tactics · 2.1k views</div>
+          <p>Zverev & Medvedev – net poaching</p>
+        </div>
+      </div>
+
+      <!-- grid item 4 – more express -->
+      <div class="grid-item">
+        <div class="thumb-placeholder">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='170' viewBox='0 0 300 170'%3E%3Crect width='300' height='170' fill='%231b3f1b'/%3E%3Ctext x='90' y='100' fill='%23eedbaa' font-size='36'%3E🔥%3C/text%3E%3C/svg%3E" alt="hot shots" style="width:100%; height:100%; object-fit: cover;" />
+          <span>▶</span>
+          <small>2:55</small>
+        </div>
+        <div class="grid-content">
+          <h4>Hot shots: AO</h4>
+          <div class="meta">🎾 reel · 7.8k views</div>
+          <p>best 10 points – Australian Open night</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- secondary row / mini feature 2 -->
+    <div style="margin: 1rem 0 2rem;">
+      <hr style="margin-bottom: 2rem;">
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between;">
+        <div style="background: white; border-radius: 36px; padding: 1.5rem 2rem; flex: 1 1 240px; border: 1px solid #d0e0d0;">
+          <span style="background: #eef6ee; padding: 0.2rem 1rem; border-radius: 40px; font-weight: 500;">🎬 classic match</span>
+          <h3 style="margin: 1rem 0 0.5rem; font-size: 1.8rem;">2008 Wimbledon final</h3>
+          <p style="color: #2a4b2a;">extended highlights · 22min · Nadal–Federer</p>
+          <div style="margin-top: 1rem;">▶▶ static replay</div>
+        </div>
+        <div style="background: white; border-radius: 36px; padding: 1.5rem 2rem; flex: 1 1 240px; border: 1px solid #d0e0d0;">
+          <span style="background: #eef6ee; padding: 0.2rem 1rem; border-radius: 40px; font-weight: 500;">🎾 racquet cam</span>
+          <h3 style="margin: 1rem 0 0.5rem;">Practice with Iga</h3>
+          <p style="color: #2a4b2a;">view from the baseline · 4K 60fps</p>
+          <div style="margin-top: 1rem;">⏯️ 14 min · training log</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- insider / email signpost (static, no actual form) -->
+    <div class="insider-box">
+      <div class="insider-text">
+        <h4>✉️ tennis express insider</h4>
+        <p>get video previews & court‑side moments</p>
+      </div>
+      <div class="email-chip">
+        <span>tennisfan@email.com</span>
+        <span class="badge">subscribe (static)</span>
+      </div>
+    </div>
+
+    <!-- footer with simple links (static) -->
+    <div class="footer-note">
+      <div style="font-weight: 500;">© 2025 Tennis Express Video — static concept</div>
+      <div class="footer-links">
+        <a href="#">all videos</a>
+        <a href="#">channels</a>
+        <a href="#">court side</a>
+        <a href="#">rss</a>
+      </div>
+    </div>
+
+    <!-- tiny note: purely static, no JS, no external dependencies -->
+    <div style="text-align: right; margin-top: 1.5rem; font-size: 0.85rem; color: #6a886a;">
+      ⚡ pure html/css · tennis express video
+    </div>
+  </div>
+</body>
+</html>
