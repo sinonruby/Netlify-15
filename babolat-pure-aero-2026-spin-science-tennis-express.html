@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Babolat Pure Aero 2026 Spin Science - Tennis Express</title>
+  <!-- static blog post · scientific / tennis tech -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f2eb;  // fresh background
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1e2b1e;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+
+    /* header / blog mast */
+    .blog-mast {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #bda47b;
+      padding-bottom: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .blog-logo {
+      font-size: 1.6rem;
+      font-weight: 500;
+      background: #c7b594;
+      padding: 0.2rem 1.6rem;
+      border-radius: 40px;
+      color: #1f3a1f;
+    }
+
+    .blog-date {
+      color: #4c694c;
+      font-size: 1.1rem;
+      background: #e6ebdb;
+      padding: 0.3rem 1.5rem;
+      border-radius: 30px;
+    }
+
+    /* title block */
+    .post-header {
+      margin-bottom: 2.8rem;
+    }
+
+    .post-header h1 {
+      font-size: 3.6rem;
+      font-weight: 380;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #173817;
+      max-width: 950px;
+    }
+
+    .post-header h1 span {
+      background: #f7f0d9;
+      padding: 0.1rem 1rem;
+      border-radius: 60px;
+      font-size: 2rem;
+      font-weight: 340;
+      display: inline-block;
+      margin-top: 0.3rem;
+    }
+
+    .subhead {
+      font-size: 1.4rem;
+      color: #2f542f;
+      border-left: 5px solid #bfa77c;
+      padding-left: 2rem;
+      margin-top: 1.2rem;
+      background: #edf3e2;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+    }
+
+    /* featured image area (pure css abstraction) */
+    .hero-sci {
+      background: #1f381f;
+      border-radius: 48px;
+      padding: 2rem 2rem;
+      margin: 2.5rem 0 3rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      border: 2px solid #b89f70;
+      box-shadow: 0 18px 28px -16px #374e37;
+    }
+
+    .hero-graph {
+      flex: 1.2;
+      min-width: 240px;
+      background: #172817;
+      border-radius: 36px;
+      padding: 2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-graph .graph-icon {
+      font-size: 6rem;
+      line-height: 1;
+      filter: drop-shadow(0 0 6px #f9e3a0);
+    }
+
+    .hero-graph .graph-caption {
+      color: #dddbb8;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      border-top: 2px dashed #aaad77;
+      padding-top: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .hero-desc {
+      flex: 2;
+      color: #f0efd2;
+    }
+
+    .hero-desc h3 {
+      font-size: 2.2rem;
+      font-weight: 340;
+      color: #f2e5c6;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-desc p {
+      font-size: 1.2rem;
+      color: #d9ddbc;
+    }
+
+    /* content columns */
+    .content-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin: 2.8rem 0;
+    }
+
+    .main-article {
+      flex: 2.5;
+      min-width: 300px;
+    }
+
+    .sidebar-tech {
+      flex: 1.3;
+      background: #ebf3e0;
+      border-radius: 38px;
+      padding: 2rem 2rem;
+      border: 2px solid #b8aa82;
+      height: fit-content;
+    }
+
+    .main-article h2 {
+      font-size: 2.2rem;
+      font-weight: 370;
+      color: #194019;
+      border-bottom: 3px solid #c7b384;
+      padding-bottom: 0.4rem;
+      margin: 2rem 0 1.5rem 0;
+    }
+    .main-article h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .main-article p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #253325;
+    }
+
+    .main-article .highlight {
+      background: #eef4d7;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      border-left: 6px solid #b68f4c;
+      font-weight: 460;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #e7ead9;
+      border-radius: 28px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    .data-table th {
+      background: #b9b085;
+      color: #112211;
+      padding: 1rem 1.2rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .data-table td {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid #b7af86;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .sidebar-tech h3 {
+      font-size: 1.9rem;
+      font-weight: 340;
+      color: #214321;
+      border-left: 7px solid #af9b64;
+      padding-left: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-spec {
+      list-style: none;
+    }
+    .tech-spec li {
+      padding: 1rem 0;
+      border-bottom: 2px dashed #bfb187;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.1rem;
+    }
+    .tech-spec li .spec-label {
+      font-weight: 500;
+      color: #2c542c;
+    }
+    .tech-spec li .spec-value {
+      font-weight: 400;
+      background: #f3f7e6;
+      padding: 0.2rem 1.2rem;
+      border-radius: 30px;
+    }
+
+    .spin-badge {
+      background: #ceb888;
+      color: #172d17;
+      padding: 0.8rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 2rem 0 1rem;
+    }
+
+    /* pull quote */
+    .pull-quote {
+      background: #d9e2cb;
+      border-radius: 48px;
+      padding: 2.2rem 3rem;
+      margin: 2.8rem 0;
+      font-size: 1.8rem;
+      font-weight: 340;
+      color: #1d3a1d;
+      border: 1px solid #c0a56d;
+      text-align: center;
+    }
+
+    /* footer */
+    .blog-footer {
+      border-top: 3px solid #b8a77b;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      color: #466446;
+    }
+    .blog-footer a {
+      text-decoration: none;
+      color: #3a613a;
+      margin-left: 2rem;
+      border-bottom: 1px dotted #8e9e72;
+    }
+
+    @media (max-width: 700px) {
+      .post-header h1 {
+        font-size: 2.5rem;
+      }
+      .hero-sci {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- simple blog header -->
+  <div class="blog-mast">
+    <div class="blog-logo">🎾 Tennis Express · Tech</div>
+    <div class="blog-date">march 2026 · static blog</div>
+  </div>
+
+  <!-- post title with science spin -->
+  <div class="post-header">
+    <h1>Babolat Pure Aero 2026: <span>science‑backed spin technology</span></h1>
+    <div class="subhead">aeromodular 3.0 + spiral grommets · lab data from Roland‑Garros test centre</div>
+  </div>
+
+  <!-- hero visual / abstract science graphic -->
+  <div class="hero-sci">
+    <div class="hero-graph">
+      <div class="graph-icon">🌀⚡</div>
+      <div class="graph-caption">spin rate simulation @ 1800 rpm</div>
+    </div>
+    <div class="hero-desc">
+      <h3>spin generation index +34%</h3>
+      <p>2026 update introduces variable beam flex and groove tech – validated by independent biomechanics lab ( Université de Lyon ).</p>
+    </div>
+  </div>
+
+  <!-- main content + sidebar -->
+  <div class="content-row">
+    <!-- left: article -->
+    <div class="main-article">
+
+      <h2>Beyond the frame: engineering spin</h2>
+      <p class="highlight">The new Pure Aero doesn’t just claim spin – it quantifies it. Babolat’s R&D focused on three science-driven innovations: asymmetric grommet positioning, a dynamic string bed concept (called “Spiral Flex”), and a thinner, more responsive beam at 5 and 7 o’clock.</p>
+      <p>In collaboration with the sports engineering lab at INSEP, the 2026 version was tested with 32 competitive players using high‑speed motion capture. Average ball rotation increased by 312 rpm compared to the 2023 model, while comfort perception improved due to flax inserts in the handle (a first for the Aero line).</p>
+
+      <h2>⚙️ laboratory results (static data)</h2>
+      <table class="data-table">
+        <thead><tr><th>metric</th><th>2023 Pure Aero</th><th>2026 prototype</th><th>improvement</th></tr></thead>
+        <tbody>
+          <tr><td>peak spin (kick serve)</td><td>2950 rpm</td><td>3450 rpm</td><td>+16.9%</td></tr>
+          <tr><td>ball dwell time (ms)</td><td>4.8 ms</td><td>5.4 ms</td><td>+12.5%</td></tr>
+          <tr><td>frame twist on off‑center</td><td>2.1°</td><td>1.5°</td><td>−28%</td></tr>
+          <tr><td>string plane deflection</td><td>2.9 mm</td><td>3.8 mm</td><td>+31%</td></tr>
+        </tbody>
+      </table>
+      <p><i>Data from pre‑production run #14, tested with RPM Blast 1.25 at 24 kg. All players used same string type.</i></p>
+
+      <h2>🔬 the “spiral grommet” phenomenon</h2>
+      <p>The most visible change: grommets that spiral slightly outward at the tip and throat. This allows the strings to slide 17% more laterally before snapping back, a principle based on friction‑reduction polymers. In plain terms: the ball digs in, then gets launched with heavy topspin. Our static high‑speed gallery shows the difference (frames below).</p>
+
+      <!-- abstract visualization (static) -->
+      <div style="background:#e1ddc9; border-radius: 44px; padding:1.8rem; margin:1.5rem 0; display:flex; gap:1rem; flex-wrap:wrap;">
+        <div style="background:#324e32; color:#e5dbb2; border-radius: 30px; padding: 1rem 2rem;">🎞️ frame 1: impact</div>
+        <div style="background:#324e32; color:#e5dbb2; border-radius: 30px; padding: 1rem 2rem;">🎞️ frame 2: pocket (5.2ms)</div>
+        <div style="background:#324e32; color:#e5dbb2; border-radius: 30px; padding: 1rem 2rem;">🎞️ frame 3: launch (spin 3320rpm)</div>
+      </div>
+    </div>
+
+    <!-- right sidebar – tech specs and spin science -->
+    <div class="sidebar-tech">
+      <h3>📐 2026 tech spec</h3>
+      <ul class="tech-spec">
+        <li><span class="spec-label">head size</span> <span class="spec-value">645 cm² / 100 in²</span></li>
+        <li><span class="spec-label">beam (variable)</span> <span class="spec-value">23 / 26 / 23 mm</span></li>
+        <li><span class="spec-label">string pattern</span> <span class="spec-value">16x19 (spin boosted)</span></li>
+        <li><span class="spec-label">RA (stiffness)</span> <span class="spec-value">66 ± 1</span></li>
+        <li><span class="spec-label">balance (strung)</span> <span class="spec-value">32.5 cm / 7 pts HL</span></li>
+        <li><span class="spec-label">weight (unstrung)</span> <span class="spec-value">300 g / 10.6 oz</span></li>
+        <li><span class="spec-label">spin potential index</span> <span class="spec-value">9.4/10 (TW lab)</span></li>
+      </ul>
+
+      <div class="spin-badge">🌀 SPHERICAL LOCK TECHNOLOGY</div>
+
+      <h3 style="margin-top: 2rem;">🧪 what the data says</h3>
+      <p style="background: #fcf9e9; border-radius: 30px; padding: 1.2rem;">“The 2026 Pure Aero generates 18% more topspin on heavy rally balls compared to its predecessor, while maintaining launch angle consistency.” – <em>Tennis Industry magazine, feb 2026</em></p>
+
+      <h3 style="margin-top: 2rem;">⏱️ static comparison</h3>
+      <ul class="tech-spec" style="margin-top: 0.5rem;">
+        <li><span class="spec-label">vs. Pure Drive</span> <span class="spec-value">+420 rpm</span></li>
+        <li><span class="spec-label">vs. Extreme MP</span> <span class="spec-value">+180 rpm</span></li>
+        <li><span class="spec-label">vs. Blade 98</span> <span class="spec-value">+670 rpm</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- pull quote: player insight (static) -->
+  <div class="pull-quote">
+    “I could feel the ball pocket deeper — the spin came without extra effort.” — test player M. Bourgue (ATP #187)
+  </div>
+
+  <!-- second row / extra science details -->
+  <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin: 2rem 0;">
+    <div style="flex: 1; background: #e2eccf; border-radius: 38px; padding: 2rem;">
+      <h4 style="font-size:1.8rem; font-weight:350;">🧲 flax dampening</h4>
+      <p>First time in Pure Aero: natural flax fibers in the handle filter harsh vibrations without killing feel. 22% reduction in high‑frequency shock.</p>
+    </div>
+    <div style="flex: 1; background: #e2eccf; border-radius: 38px; padding: 2rem;">
+      <h4 style="font-size:1.8rem; font-weight:350;">📈 spin profile</h4>
+      <p>Optimized for modern western grip. The 2026 launches the ball with a vertical exit angle 2.3° higher than previous – ideal for heavy topspin.</p>
+    </div>
+  </div>
+
+  <!-- footnote / more static content -->
+  <div style="background: #fcf4df; border-radius: 60px; padding: 2rem 2.2rem; margin: 2.8rem 0; border:2px solid #ab9e71;">
+    <p style="font-size: 1.4rem;"><strong>📋 Babolat internal white paper summary</strong> – the new elliptical grommet geometry increases string snap‑back speed by 0.8 m/s. Combined with slightly stiffer throat flex, the result is a "whip effect" quantified by high‑speed footage. Static samples available at retail starting April 2026.</p>
+  </div>
+
+  <!-- blog footer -->
+  <div class="blog-footer">
+    <div>© 2026 Tennis Express — science first</div>
+    <div>
+      <a href="#">all posts</a>
+      <a href="#">tech archive</a>
+      <a href="#">about</a>
+    </div>
+  </div>
+
+  <div style="text-align:right; margin-top:2rem; color:#6e8f6e; border-top:2px dashed #beb27e; padding-top:1rem; font-size:0.9rem;">
+    ⚡ static blog · Babolat Pure Aero 2026 spin technology
+  </div>
+</div>
+</body>
+</html>
